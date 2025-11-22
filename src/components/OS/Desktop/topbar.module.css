@@ -1,0 +1,133 @@
+.topBar {
+    position: relative;
+    z-index: 10;
+    height: 32px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #101011, #080809);
+    border-bottom: 1px solid rgba(60, 60, 60, 0.6);
+    box-shadow:
+            0 8px 18px rgba(0, 0, 0, 0.9),
+            0 0 0 1px rgba(0, 0, 0, 0.8);
+    font-size: 0.78rem;
+    color: #d4d4d4;
+    user-select: none;
+}
+
+.leftArea,
+.centerArea,
+.rightArea {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.leftArea {
+    min-width: 64px;
+}
+
+.systemDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #3f3f3f;
+}
+
+.centerArea {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: #e5e5e5;
+}
+
+.rightArea {
+    min-width: 90px;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.battery {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.batteryBody {
+    position: relative;
+    width: 22px;
+    height: 10px;
+    border-radius: 2px;
+    border: 1px solid #9e9e9e;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.batteryFill {
+    height: 100%;
+    background: linear-gradient(to right, #22c55e, #16a34a);
+}
+
+.batteryCap {
+    width: 3px;
+    height: 6px;
+    border-radius: 0 2px 2px 0;
+    background: #9e9e9e;
+}
+
+.clock {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+    .topBar {
+        height: 30px;
+        padding: 0 8px;
+        font-size: 0.74rem;
+    }
+
+    .centerArea {
+        font-size: 0.76rem;
+    }
+
+    .rightArea {
+        min-width: 70px;
+        gap: 6px;
+    }
+}
+
+.battery {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.batteryBody {
+    position: relative;
+    width: 22px;
+    height: 10px;
+    border-radius: 2px;
+    border: 1px solid #d4d4d4;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.batteryFill {
+    height: 100%;
+    background: linear-gradient(to right, #f9fafb, #e5e5e5);
+}
+
+.batteryCap {
+    width: 3px;
+    height: 6px;
+    border-radius: 0 2px 2px 0;
+    background: #d4d4d4;
+}
+
+.batteryText {
+    font-size: 0.72rem;
+    color: #d4d4d4;
+}

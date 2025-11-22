@@ -1,36 +1,36 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import BootScreen from './BootScreen/BootScreen';
 import LoginScreen from './LoginScreen/LoginScreen';
-import Desktop from './Desktop/Desktop';
+import { Desktop, OSAppId } from './Desktop/Desktop';
 
-type OSPhase = 'boot' | 'login' | 'desktop';
+type Phase = 'boot' | 'login' | 'desktop';
 
-export default function OSApp() {
-    const [phase, setPhase] = useState<OSPhase>('boot');
+export const OSApp: React.FC = () => {
+    const [phase, setPhase] = useState<Phase>('boot');
 
-    const handleBootComplete = useCallback(() => {
+    const handleBootComplete = () => {
         setPhase('login');
-    }, []);
+    };
 
-    const handleLogin = useCallback(() => {
+    const handleLogin = () => {
         setPhase('desktop');
-    }, []);
+    };
 
-    return (
-        <div
-            id="os-root"
-            style={{
-                height: '100vh',
-                width: '100vw',
-                overflow: 'hidden',
-                backgroundColor: '#000000',
-            }}
-        >
-            {phase === 'boot' && <BootScreen onComplete={handleBootComplete} />}
-            {phase === 'login' && <LoginScreen onLogin={handleLogin} />}
-            {phase === 'desktop' && <Desktop />}
-        </div>
-    );
-}
+    const handleAppLaunch = (appId: OSAppId) => {
+        console.log('[OSApp] launch app:', appId);
+    };
+
+    if (phase === 'boot') {
+        return <BootScreen onComplete={handleBootComplete} />;
+    }
+
+    if (phase === 'login') {
+        return <LoginScreen onLogin={handleLogin} />;
+    }
+
+    return <Desktop onAppLaunch={handleAppLaunch} />;
+};
+
+export default OSApp;
