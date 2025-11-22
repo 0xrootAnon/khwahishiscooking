@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-    title: 'Khwahish | Portfolio OS',
-    description: 'OS-style developer portfolio',
+    title: 'Khwahish Sharma',
+    description: 'portfolio of Khwahish Sharma',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
