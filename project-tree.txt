@@ -1,0 +1,100 @@
+.
+├── create_structure.sh
+├── eslint.config.mjs
+├── fix_escaped_newlines.sh
+├── .gitignore
+├── .idea
+│   ├── .gitignore
+│   └── workspace.xml
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── project-tree.txt
+├── public
+│   ├── assets
+│   │   ├── audio
+│   │   ├── avatars
+│   │   ├── icons
+│   │   └── wallpapers
+│   ├── favicon.ico
+│   └── resume.pdf
+├── README.md
+├── scripts
+│   └── export-to-gh-pages.sh
+├── src
+│   ├── app
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── OS
+│   │   │   ├── BootScreen
+│   │   │   │   ├── boot.module.css
+│   │   │   │   └── BootScreen.tsx
+│   │   │   ├── Desktop
+│   │   │   │   ├── desktop.module.css
+│   │   │   │   └── Desktop.tsx
+│   │   │   ├── Dock
+│   │   │   │   ├── dock.module.css
+│   │   │   │   └── Dock.tsx
+│   │   │   ├── Icon
+│   │   │   │   ├── IconButton.tsx
+│   │   │   │   └── icon.module.css
+│   │   │   ├── LoginScreen
+│   │   │   │   ├── login.module.css
+│   │   │   │   └── LoginScreen.tsx
+│   │   │   ├── OSApp.tsx
+│   │   │   ├── Taskbar
+│   │   │   │   ├── taskbar.module.css
+│   │   │   │   └── Taskbar.tsx
+│   │   │   ├── TopBar
+│   │   │   │   ├── topbar.module.css
+│   │   │   │   └── TopBar.tsx
+│   │   │   ├── Window
+│   │   │   │   ├── window.module.css
+│   │   │   │   └── Window.tsx
+│   │   │   └── WindowManager
+│   │   │       ├── windowManager.module.css
+│   │   │       └── WindowManager.tsx
+│   │   ├── UI
+│   │   │   ├── Button.tsx
+│   │   │   ├── IconSvg.tsx
+│   │   │   └── Modal.tsx
+│   │   └── Windows
+│   │       ├── BlogWindow
+│   │       │   └── index.tsx
+│   │       ├── ContactWindow
+│   │       │   └── index.tsx
+│   │       ├── ProjectsWindow
+│   │       │   └── index.tsx
+│   │       ├── ResumeWindow
+│   │       │   └── index.tsx
+│   │       ├── SettingsWindow
+│   │       │   └── index.tsx
+│   │       ├── SystemMonitorWindow
+│   │       │   └── index.tsx
+│   │       └── TerminalWindow
+│   │           ├── terminal.module.css
+│   │           └── TerminalWindow.tsx
+│   ├── data
+│   │   ├── blogIndex.ts
+│   │   ├── projects.ts
+│   │   └── skills.ts
+│   ├── hooks
+│   │   ├── useAudioSync.ts
+│   │   ├── useBoot.ts
+│   │   ├── useIsMobile.ts
+│   │   └── useWindowManager.ts
+│   ├── lib
+│   │   ├── audio.ts
+│   │   ├── battery.ts
+│   │   └── time.ts
+│   ├── store
+│   │   └── uiStore.ts
+│   └── styles
+│       ├── globals.css
+│       ├── utils.css
+│       └── variables.css
+└── tsconfig.json
+
+35 directories, 62 files
