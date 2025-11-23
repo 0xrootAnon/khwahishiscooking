@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import BootScreen from './BootScreen/BootScreen';
 import LoginScreen from './LoginScreen/LoginScreen';
-import { Desktop, OSAppId } from './Desktop/Desktop';
+import Desktop from './Desktop/Desktop';
 
 type Phase = 'boot' | 'login' | 'desktop';
 
@@ -18,10 +18,6 @@ export const OSApp: React.FC = () => {
         setPhase('desktop');
     };
 
-    const handleAppLaunch = (appId: OSAppId) => {
-        console.log('[OSApp] launch app:', appId);
-    };
-
     if (phase === 'boot') {
         return <BootScreen onComplete={handleBootComplete} />;
     }
@@ -29,8 +25,7 @@ export const OSApp: React.FC = () => {
     if (phase === 'login') {
         return <LoginScreen onLogin={handleLogin} />;
     }
-
-    return <Desktop onAppLaunch={handleAppLaunch} />;
+    return <Desktop />;
 };
 
 export default OSApp;
