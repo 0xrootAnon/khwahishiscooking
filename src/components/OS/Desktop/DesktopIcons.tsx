@@ -2,14 +2,10 @@
 
 import React from 'react';
 import styles from './desktopIcons.module.css';
-import type { DesktopApp, OSAppId } from './Desktop';
+import { useUIStore } from '@/store/uiStore';
+import type { AppWindowId } from '@/store/uiStore';
 
-export interface DesktopIconsProps {
-    apps: DesktopApp[];
-    onAppLaunch: (id: OSAppId) => void;
-}
-
-const APP_ICON_ORDER: OSAppId[] = [
+const APP_ICON_ORDER: AppWindowId[] = [
     'projects',
     'terminal',
     'filesystem',
@@ -19,8 +15,8 @@ const APP_ICON_ORDER: OSAppId[] = [
     'resume',
 ];
 
-function getIconLabel(appId: OSAppId): string {
-    switch (appId) {
+function getIconLabel(id: AppWindowId): string {
+    switch (id) {
         case 'projects':
             return 'User';
         case 'terminal':
@@ -36,11 +32,11 @@ function getIconLabel(appId: OSAppId): string {
         case 'resume':
             return 'Resume';
         default:
-            return appId;
+            return id;
     }
 }
 
-const AppIcon: React.FC<{ id: OSAppId }> = ({ id }) => {
+const AppIcon: React.FC<{ id: AppWindowId }> = ({ id }) => {
     switch (id) {
         case 'projects':
             return (
@@ -103,30 +99,29 @@ const AppIcon: React.FC<{ id: OSAppId }> = ({ id }) => {
     }
 };
 
-export const DesktopIcons: React.FC<DesktopIconsProps> = ({
-                                                              apps,
-                                                              onAppLaunch,
-                                                          }) => {
-    const ordered = APP_ICON_ORDER
-        .map(id => apps.find(a => a.id === id))
-        .filter((a): a is DesktopApp => !!a);
+export const DesktopIcons: React.FC = () => {
+    const openWindow = useUIStore((s) => s.openWindow);
+
+    const handleOpen = (id: AppWindowId) => () => {
+        openWindow(id);
+    };
 
     return (
         <section
             className={styles.desktopIcons}
             aria-label="Desktop application icons"
         >
-            {ordered.map(app => (
+            {APP_ICON_ORDER.map((id) => (
                 <button
-                    key={app.id}
+                    key={id}
                     type="button"
                     className={styles.iconButton}
-                    onClick={() => onAppLaunch(app.id)}
+                    onClick={handleOpen(id)}
                 >
                     <div className={styles.iconGlyph}>
-                        <AppIcon id={app.id} />
+                        <AppIcon id={id} />
                     </div>
-                    <span className={styles.iconLabel}>{getIconLabel(app.id)}</span>
+                    <span className={styles.iconLabel}>{getIconLabel(id)}</span>
                 </button>
             ))}
         </section>

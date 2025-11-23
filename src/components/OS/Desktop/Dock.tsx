@@ -2,14 +2,10 @@
 
 import React from 'react';
 import styles from './dock.module.css';
-import type { DesktopApp, OSAppId } from './Desktop';
+import { useUIStore } from '@/store/uiStore';
+import type { AppWindowId } from '@/store/uiStore';
 
-type DockProps = {
-    apps: DesktopApp[];
-    onAppLaunch: (id: OSAppId) => void;
-};
-
-const DOCK_ORDER: OSAppId[] = [
+const DOCK_ORDER: AppWindowId[] = [
     'terminal',
     'system-monitor',
     'blog',
@@ -17,7 +13,7 @@ const DOCK_ORDER: OSAppId[] = [
     'resume',
 ];
 
-const DockIconSvg: React.FC<{ id: OSAppId }> = ({ id }) => {
+const DockIconSvg: React.FC<{ id: AppWindowId }> = ({ id }) => {
     switch (id) {
         case 'terminal':
             return (
@@ -66,26 +62,52 @@ const DockIconSvg: React.FC<{ id: OSAppId }> = ({ id }) => {
     }
 };
 
-export const Dock: React.FC<DockProps> = ({ apps, onAppLaunch }) => {
-    const ordered = DOCK_ORDER
-        .map(id => apps.find(a => a.id === id))
-        .filter((a): a is DesktopApp => !!a);
+export const Dock: React.FC = () => {
+    const windows = useUIStore((s) => s.windows);
+    const openWindow = useUIStore((s) => s.openWindow);
+    const toggleMinimize = useUIStore((s) => s.toggleMinimize);
+    const focusWindow = useUIStore((s) => s.focusWindow);
+
+    const handleDockClick = (id: AppWindowId) => () => {
+        const w = windows[id];
+
+        if (!w || !w.isOpen) {
+            openWindow(id);
+            return;
+        }
+
+        if (w.isMinimized) {
+            toggleMinimize(id);
+            focusWindow(id);
+            return;
+        }
+
+        toggleMinimize(id);
+    };
 
     return (
         <nav className={styles.dockRoot} aria-label="Application dock">
             <div className={styles.dockInner}>
-                {ordered.map(app => (
-                    <button
-                        key={app.id}
-                        type="button"
-                        className={styles.dockButton}
-                        onClick={() => onAppLaunch(app.id)}
-                    >
-                        <div className={styles.dockIconInner}>
-                            <DockIconSvg id={app.id} />
-                        </div>
-                    </button>
-                ))}
+                {DOCK_ORDER.map((id) => {
+                    const w = windows[id];
+                    const isActive = w?.isOpen ?? false;
+
+                    return (
+                        <button
+                            key={id}
+                            type="button"
+                            className={`${styles.dockButton} ${
+                                isActive ? styles.dockButtonActive : ''
+                            }`}
+                            onClick={handleDockClick(id)}
+                        >
+                            <div className={styles.dockIconInner}>
+                                <DockIconSvg id={id} />
+                            </div>
+                            <span className={styles.dockIndicator} />
+                        </button>
+                    );
+                })}
             </div>
         </nav>
     );

@@ -9,7 +9,6 @@
     pointer-events: none;
 }
 
-
 .dockInner {
     pointer-events: auto;
     display: flex;
@@ -27,6 +26,7 @@
 }
 
 .dockButton {
+    position: relative;
     border: none;
     background: none;
     padding: 4px;
@@ -45,6 +45,28 @@
     transform: translateY(-3px) scale(1.03);
     background: rgba(255, 255, 255, 0.03);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.9);
+}
+
+.dockButtonActive {
+    opacity: 1;
+}
+
+.dockIndicator {
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    transform: translateX(-50%) translateY(2px);
+    width: 7px;
+    height: 3px;
+    border-radius: 9999px;
+    background: rgba(249, 250, 251, 0.82);
+    opacity: 0;
+    transition: opacity 120ms ease-out, transform 120ms ease-out;
+}
+
+.dockButtonActive .dockIndicator {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-1px);
 }
 
 .dockIconInner {
